@@ -1,0 +1,31 @@
+{
+  "name": "mybills-api",
+  "version": "1.0.0",
+  "description": "api to manage personal bills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliecerLR/mybills-app.git"
+  },
+  "keywords": [
+    "bills",
+    "api"
+  ],
+  "author": "Eliecer Lemus <lemuselr@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliecerLR/mybills-app/issues"
+  },
+  "homepage": "https://github.com/eliecerLR/mybills-app#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
