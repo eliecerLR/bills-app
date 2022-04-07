@@ -1,10 +1,8 @@
 const { Router } = require('express');
-const addTransaction = require('../controllers/transaction.controller');
+const { addTransaction, getTransactions } = require('../controllers/transaction.controller');
 const router = Router();
 
-router.get('/',(req, res) =>{
-    res.status(200).json({start: 'workin dude'})
-})
+router.get('/', getTransactions)
 
 router.post('/transaction', addTransaction)
 

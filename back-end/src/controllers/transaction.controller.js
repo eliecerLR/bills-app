@@ -1,5 +1,15 @@
 const Transaction = require('../models/Transaction');
 
+async function getTransactions(req, res) {
+    try {
+        const transactions = await Transaction.findAll();
+        res.status(200).json({ data: transactions })
+    } catch (error) {
+        res.status(500)
+        console.log(`Unable to get transactions ${error}`)
+    }
+}
+
 async function addTransaction(req, res) {
     const { concept, type, amount, category } = req.body;
 
@@ -23,4 +33,8 @@ async function addTransaction(req, res) {
     }
 }
 
-module.exports = addTransaction;
+
+module.exports = {
+    addTransaction,
+    getTransactions
+};
