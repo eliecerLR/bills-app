@@ -1,5 +1,20 @@
 const Transaction = require('../models/Transaction');
 
+async function getFirstTransactions(req, res) {
+    
+    try {
+        const firstTransactions = await Transaction.findAll({
+            order: 'follower DESC',
+            limit: 10
+        })
+        res.status(200).json({data: firstTransactions})
+        
+    } catch (error) {
+        res.status(500)
+        console.log(`Unable to get transactions ${error}`)
+    }
+}
+
 async function getTransactions(req, res) {
     try {
         const transactions = await Transaction.findAll();
