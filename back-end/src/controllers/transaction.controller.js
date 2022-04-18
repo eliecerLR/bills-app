@@ -4,10 +4,10 @@ async function getFirstTransactions(req, res) {
     
     try {
         const firstTransactions = await Transaction.findAll({
-            order: 'follower DESC',
-            limit: 10
+            limit: 10,
+            order: [['id', 'DESC']],
         })
-        res.status(200).json({data: firstTransactions})
+        res.status(200).json(firstTransactions)
         
     } catch (error) {
         res.status(500)
@@ -15,10 +15,10 @@ async function getFirstTransactions(req, res) {
     }
 }
 
-async function getTransactions(req, res) {
+async function getAllTransactions(req, res) {
     try {
         const transactions = await Transaction.findAll();
-        res.status(200).json({ data: transactions })
+        res.status(200).json(transactions)
     } catch (error) {
         res.status(500)
         console.log(`Unable to get transactions ${error}`)
@@ -51,5 +51,6 @@ async function addTransaction(req, res) {
 
 module.exports = {
     addTransaction,
-    getTransactions
+    getAllTransactions,
+    getFirstTransactions
 };

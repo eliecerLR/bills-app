@@ -1,8 +1,11 @@
 const { Router } = require('express');
-const { addTransaction, getTransactions } = require('../controllers/transaction.controller');
+const { addTransaction, getAllTransactions, getFirstTransactions } = require('../controllers/transaction.controller');
 const router = Router();
 
-router.get('/', getTransactions)
+router.get('/transactions', getAllTransactions);
+
+router.get('/last-transactions', getFirstTransactions)
+
 
 router.post('/transaction', addTransaction)
 
