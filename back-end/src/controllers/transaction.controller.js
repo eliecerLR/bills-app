@@ -11,7 +11,6 @@ async function getAllTransactions(req, res) {
 }
 
 async function getFirstTransactions(req, res) {
-
     try {
         const firstTransactions = await Transaction.findAll({
             limit: 10,
@@ -26,7 +25,6 @@ async function getFirstTransactions(req, res) {
 }
 
 async function getTransaction(req, res) {
-
     try {
         const transaction = await Transaction.findAll({
             where: {
@@ -69,25 +67,44 @@ async function updateTransaction(req, res) {
     const { concept, amount, category } = req.body
 
     try {
-        let updateTransaction = await Transaction.update({
+        let modifyTransaction = await Transaction.update({
             concept,
             amount,
             category,
         },
-            {
-                where: {
-                    id: req.params.id
-                }
-            })
+        {
+            where: {
+                id: req.params.id
+            }
+        })
 
-        if (updateTransaction) {
-            
-            return res.status(200).json({message: 'Data Successfully Updated'})
+        if (modifyTransaction) {
+            return res.status(200).json({ message: `Transaction ${req.param.id} modified successfully` })
         }
 
     } catch (error) {
-        res.status(500).json({message:`An error was ocurred ${error}`})
+        res.status(500).json({ message: `An error was ocurred ${error}` })
         console.log(`Unable to update the transaction ${req.params.id}: ${error}`)
+    }
+}
+
+async function deleteTransaction(req, res) {
+    try {
+        let removeTransaction = await Transaction.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        if (removeTransaction) {
+            res.status(200).json({
+                message:`Transaction ${req.param.id} removed successfully`,
+                data: removeTransaction
+            })
+        }
+    } catch (error) {
+        res.status(500).json({ message: `An error was ocurred ${error}` })
+        console.log(`Unable to delete the transaction ${req.params.id}: ${error}`)
     }
 }
 
@@ -98,4 +115,5 @@ module.exports = {
     getFirstTransactions,
     getTransaction,
     updateTransaction,
+    deleteTransaction
 };
