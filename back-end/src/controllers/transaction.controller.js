@@ -1,20 +1,5 @@
 const Transaction = require('../models/Transaction');
 
-async function getFirstTransactions(req, res) {
-    
-    try {
-        const firstTransactions = await Transaction.findAll({
-            limit: 10,
-            order: [['id', 'DESC']],
-        })
-        res.status(200).json(firstTransactions)
-        
-    } catch (error) {
-        res.status(500)
-        console.log(`Unable to get transactions ${error}`)
-    }
-}
-
 async function getAllTransactions(req, res) {
     try {
         const transactions = await Transaction.findAll();
@@ -22,6 +7,37 @@ async function getAllTransactions(req, res) {
     } catch (error) {
         res.status(500)
         console.log(`Unable to get transactions ${error}`)
+    }
+}
+
+async function getFirstTransactions(req, res) {
+
+    try {
+        const firstTransactions = await Transaction.findAll({
+            limit: 10,
+            order: [['id', 'DESC']],
+        })
+        res.status(200).json(firstTransactions)
+
+    } catch (error) {
+        res.status(500)
+        console.log(`Unable to get transactions ${error}`)
+    }
+}
+
+async function getTransaction(req, res) {
+
+    try {
+        const transaction = await Transaction.findAll({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.status(200).json(transaction)
+
+    } catch (error) {
+        res.status(500)
+        console.log(`Unable to get your transaction: ${error}`)
     }
 }
 
@@ -48,9 +64,38 @@ async function addTransaction(req, res) {
     }
 }
 
+async function updateTransaction(req, res) {
+
+    const { concept, amount, category } = req.body
+
+    try {
+        let updateTransaction = await Transaction.update({
+            concept,
+            amount,
+            category,
+        },
+            {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+        if (updateTransaction) {
+            
+            return res.status(200).json({message: 'Data Successfully Updated'})
+        }
+
+    } catch (error) {
+        res.status(500).json({message:`An error was ocurred ${error}`})
+        console.log(`Unable to update the transaction ${req.params.id}: ${error}`)
+    }
+}
+
 
 module.exports = {
     addTransaction,
     getAllTransactions,
-    getFirstTransactions
+    getFirstTransactions,
+    getTransaction,
+    updateTransaction,
 };
