@@ -2,7 +2,9 @@ const Transaction = require('../models/Transaction');
 
 async function getAllTransactions(req, res) {
     try {
-        const transactions = await Transaction.findAll();
+        const transactions = await Transaction.findAll({
+            order: [['id', 'DESC']]
+        });
         res.status(200).json(transactions)
     } catch (error) {
         res.status(500)
