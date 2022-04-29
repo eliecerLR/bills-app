@@ -1,5 +1,7 @@
 # My Bills App Full repository
 
+## https://bills-client.herokuapp.com/
+
 ## Una Aplicación enfocada a administrar tu balance y cuentas personal!
 
 ### Instalacion
@@ -39,7 +41,6 @@
 
 ##### Y, si todo salio bien tendremos nuestra Aplicacion Funcionando
 
-##### Pueden ver una Demo funcional en: https://bills-client.herokuapp.com/
 
 ![img](https://github.com/eliecerLR/bills-app/blob/main/example.png)
     
